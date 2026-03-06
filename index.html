@@ -120,16 +120,16 @@
 
         /* Dropdown menu */
         .mobile-menu {
-            display: none; position: absolute; top: calc(100% + 8px); right: 0;
-            flex-direction: column; padding: 8px 0;
-            background: var(--bg-nav); border-radius: 0;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-            min-width: 160px; z-index: 200;
+            display: none; position: absolute; top: 100%; right: 0;
+            flex-direction: column; padding: 6px 0;
+            background: var(--bg-nav);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            min-width: 140px; z-index: 200;
         }
         .mobile-menu.open { display: flex; }
         .mobile-menu a {
             color: var(--nav-link); text-decoration: none;
-            font-size: 0.95em; padding: 10px 20px;
+            font-size: 0.9em; padding: 8px 16px;
             transition: color 0.2s, background 0.2s;
         }
         .mobile-menu a:hover { color: var(--accent-light); background: rgba(255,255,255,0.05); }
@@ -614,6 +614,13 @@
         function toggleMenu() {
             document.querySelector('.mobile-menu').classList.toggle('open');
         }
+        document.addEventListener('click', function(e) {
+            const menu = document.querySelector('.mobile-menu');
+            const hamburger = document.querySelector('.hamburger');
+            if (menu.classList.contains('open') && !menu.contains(e.target) && !hamburger.contains(e.target)) {
+                menu.classList.remove('open');
+            }
+        });
 
         // ===== THEME TOGGLE =====
         function toggleTheme() {
