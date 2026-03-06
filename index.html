@@ -98,7 +98,7 @@
             font-weight: 600; font-size: 1.4em; color: var(--nav-name);
             text-decoration: none;
         }
-        .nav-right { display: flex; align-items: center; }
+        .nav-right { display: flex; align-items: center; position: relative; }
         nav .nav-links { display: none; }
         nav .nav-links a {
             color: var(--nav-link); text-decoration: none; font-size: 1.2em;
@@ -120,9 +120,9 @@
 
         /* Dropdown menu */
         .mobile-menu {
-            display: none; position: absolute; top: 100%; right: 0;
+            display: none; position: absolute; top: calc(100% + 8px); right: 0;
             flex-direction: column; padding: 8px 0;
-            background: var(--bg-nav); border-radius: 8px;
+            background: var(--bg-nav); border-radius: 0;
             box-shadow: 0 4px 20px rgba(0,0,0,0.3);
             min-width: 160px; z-index: 200;
         }
@@ -349,12 +349,12 @@
             <button class="hamburger" aria-label="Menu" onclick="toggleMenu()">
                 <span></span><span></span><span></span>
             </button>
-        </div>
-        <div class="mobile-menu">
-            <a href="#about" onclick="toggleMenu()">About</a>
-            <a href="#news" onclick="toggleMenu()">News</a>
-            <a href="#blogs" onclick="toggleMenu()">Blogs</a>
-            <a href="#publications" onclick="toggleMenu()">Publications</a>
+            <div class="mobile-menu">
+                <a href="#about" onclick="toggleMenu()">About</a>
+                <a href="#news" onclick="toggleMenu()">News</a>
+                <a href="#blogs" onclick="toggleMenu()">Blogs</a>
+                <a href="#publications" onclick="toggleMenu()">Publications</a>
+            </div>
         </div>
     </nav>
 
