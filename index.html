@@ -91,7 +91,7 @@
             background: var(--bg-nav); padding: 0 90px; display: flex;
             align-items: center; justify-content: space-between; height: 45px;
             position: sticky; top: 0; z-index: 100;
-            transition: background 0.3s; flex-wrap: wrap;
+            transition: background 0.3s; position: relative;
         }
         nav .nav-name {
             font-family: 'Lato', Verdana, Helvetica, sans-serif;
@@ -118,20 +118,21 @@
         }
         .hamburger:hover span { background: var(--accent-light); }
 
-        /* Mobile dropdown menu */
+        /* Dropdown menu */
         .mobile-menu {
-            display: none; width: 100%;
-            flex-direction: column; padding: 10px 0;
+            display: none; position: absolute; top: 100%; right: 20px;
+            flex-direction: column; padding: 8px 0;
+            background: var(--bg-nav); border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            min-width: 160px; z-index: 200;
         }
         .mobile-menu.open { display: flex; }
         .mobile-menu a {
             color: var(--nav-link); text-decoration: none;
-            font-size: 1.1em; padding: 10px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            transition: color 0.2s;
+            font-size: 0.95em; padding: 10px 20px;
+            transition: color 0.2s, background 0.2s;
         }
-        .mobile-menu a:last-child { border-bottom: none; }
-        .mobile-menu a:hover { color: var(--accent-light); }
+        .mobile-menu a:hover { color: var(--accent-light); background: rgba(255,255,255,0.05); }
 
         /* Theme toggle button */
         .theme-toggle {
