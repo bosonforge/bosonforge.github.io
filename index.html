@@ -24,6 +24,7 @@
 
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
 
         /* ===== THEME VARIABLES ===== */
         :root {
@@ -158,7 +159,9 @@
         .section h2 {
             font-family: 'Lato', Verdana, Helvetica, sans-serif;
             font-size: 2.8rem; font-weight: 400; color: var(--accent);
-            margin-bottom: 30px;
+            margin-bottom: 30px; padding-bottom: 10px;
+            display: inline-block;
+            border-bottom: 3px solid var(--accent);
         }
         .section p { margin-bottom: 22px; font-size: 20px; color: var(--text-primary); line-height: 1.8; }
         .section a { color: var(--accent); text-decoration: none; }
@@ -168,25 +171,25 @@
         .news-wrapper { position: relative; }
         .news-wrapper::after {
             content: ''; position: absolute; bottom: 0; left: 0; right: 0;
-            height: 40px; background: linear-gradient(transparent, var(--gradient-end));
+            height: 80px; background: linear-gradient(rgba(255,255,255,0), var(--gradient-end) 70%);
             pointer-events: none;
         }
         .news-list {
-            list-style: none; padding: 0;
-            max-height: 240px; overflow-y: auto;
+            list-style: none; padding: 0 0 60px 0;
+            max-height: 300px; overflow-y: auto;
             scrollbar-width: thin; scrollbar-color: var(--scrollbar) transparent;
         }
         .news-list::-webkit-scrollbar { width: 5px; }
         .news-list::-webkit-scrollbar-track { background: transparent; }
         .news-list::-webkit-scrollbar-thumb { background: var(--scrollbar); border-radius: 4px; }
         .news-list li {
-            display: flex; gap: 20px; padding: 12px 0; font-size: 19px;
-            line-height: 1.6; border-bottom: 1px solid var(--border-light);
+            display: flex; gap: 16px; padding: 8px 0; font-size: 16px;
+            line-height: 1.5; border-bottom: 1px solid var(--border-light);
         }
         .news-list li:last-child { border-bottom: none; }
         .news-date {
-            flex-shrink: 0; min-width: 120px; font-weight: 700;
-            color: var(--text-primary); font-size: 18px;
+            flex-shrink: 0; min-width: 100px; font-weight: 700;
+            color: var(--text-primary); font-size: 15px;
         }
         .news-list a { color: var(--accent); }
         .news-list a:hover { color: var(--accent-hover); }
@@ -317,7 +320,7 @@
         <div class="hero">
             <img src="images/profile.jpg" alt="Dheeraj Vattikonda" class="hero-photo" />
             <div class="hero-info">
-                <h1><span style="color: var(--accent);">Dheeraj</span> Vattikonda</h1>
+                <h1><span style="color: var(--accent); font-weight: 700;">Dheeraj</span> Vattikonda</h1>
                 <div class="subtitle">
                     Visiting Researcher, ServiceNow AI Research<br>
                     M.Sc. Student, McGill University &amp; Mila
@@ -369,15 +372,15 @@
                     <span>Check out our <a href="https://emilianopp.github.io/Privileged-Information-Distillation-and-Self-Distillation/" target="_blank">blog</a> on Self-Distillation and Privileged Information Distillation</span>
                 </li>
                 <li>
-                    <span class="news-date">2025</span>
-                    <span><a href="https://slideslive.com/39044475/how-to-train-your-llm-web-agent-a-statistical-diagnosis">Oral presentation</a> at ICML 2025 CUA Workshop</span>
-                </li>
-                <li>
-                    <span class="news-date">2025</span>
+                    <span class="news-date">Dec 2025</span>
                     <span>"How to Train Your LLM Web Agent" accepted at NeurIPS 2025</span>
                 </li>
                 <li>
-                    <span class="news-date">2024</span>
+                    <span class="news-date">Jul 2025</span>
+                    <span><a href="https://slideslive.com/39044475/how-to-train-your-llm-web-agent-a-statistical-diagnosis">Oral presentation</a> at ICML 2025 CUA Workshop</span>
+                </li>
+                <li>
+                    <span class="news-date">Dec 2024</span>
                     <span>Aurora accepted as <strong>Spotlight</strong> at NeurIPS 2024</span>
                 </li>
                 <li>
@@ -388,11 +391,19 @@
                     <span class="news-date">Aug 2023</span>
                     <span>Started M.Sc. at <a href="https://mila.quebec/en/" target="_blank">Mila</a> / <a href="https://www.mcgill.ca/" target="_blank">McGill University</a></span>
                 </li>
+                <li>
+                    <span class="news-date">Nov 2022</span>
+                    <span>Started research internship at <a href="https://home.iitd.ac.in/" target="_blank">IIT Delhi</a></span>
+                </li>
+                <li>
+                    <span class="news-date">Jan 2022</span>
+                    <span>Started research internship at <a href="https://mila.quebec/en/" target="_blank">Mila</a></span>
+                </li>
             </ul>
             </div>
         </div>
         <div class="section" id="publications">
-            <h2>Selected Publications</h2>
+            <h2>Publications</h2>
 
             <!-- 2026 -->
             <div class="pub-year-group">
@@ -525,7 +536,7 @@
 
     <!-- ===== FOOTER ===== -->
     <footer>
-        Last updated February 2026
+        Built with &#129391; in Montreal &middot; Last updated February 2026
     </footer>
 
     <script>
