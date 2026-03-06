@@ -46,32 +46,36 @@
             --scrollbar: #cbd5e1;
             --photo-border: #b509ac;
             --pub-title: #000;
+            --section-heading: var(--accent);
+            --name-accent: var(--accent);
 
             --gradient-end: #fff;
             --strong-color: inherit;
         }
 
         [data-theme="dark"] {
-            --bg: #0d1117;
-            --bg-nav: #161b22;
-            --bg-card: #161b22;
-            --text-primary: #e0e0e0;
-            --text-secondary: #b0b0b0;
-            --text-muted: #8b949e;
-            --text-heading: #f0f0f0;
-            --accent: #2698ba;
-            --accent-hover: #1e7a9a;
-            --accent-light: #3db8da;
-            --border: #21262d;
-            --border-light: #1c2128;
-            --nav-link: #c0c0c0;
-            --nav-name: #3db8da;
-            --sep: #555;
-            --scrollbar: #30363d;
-            --photo-border: #2698ba;
-            --pub-title: #f0f0f0;
+            --bg: #111111;
+            --bg-nav: #0a0a0a;
+            --bg-card: #1a1a1a;
+            --text-primary: #d4d4d4;
+            --text-secondary: #aaaaaa;
+            --text-muted: #888888;
+            --text-heading: #ffffff;
+            --accent: #5ba3b8;
+            --accent-hover: #7ec4d8;
+            --accent-light: #7ec4d8;
+            --border: #3a3a3a;
+            --border-light: #353535;
+            --nav-link: #d4d4d4;
+            --nav-name: #5ba3b8;
+            --sep: #666;
+            --scrollbar: #444444;
+            --photo-border: #5ba3b8;
+            --pub-title: #ffffff;
+            --section-heading: #ffffff;
+            --name-accent: #ffffff;
 
-            --gradient-end: #0d1117;
+            --gradient-end: #111111;
             --strong-color: #e0e0e0;
         }
 
@@ -158,10 +162,10 @@
         .section:first-of-type { border-top: none; padding-top: 0; }
         .section h2 {
             font-family: 'Lato', Verdana, Helvetica, sans-serif;
-            font-size: 2.8rem; font-weight: 400; color: var(--accent);
+            font-size: 2.8rem; font-weight: 400; color: var(--section-heading);
             margin-bottom: 30px; padding-bottom: 10px;
             display: inline-block;
-            border-bottom: 3px solid var(--accent);
+            border-bottom: 3px solid var(--section-heading);
         }
         .section p { margin-bottom: 22px; font-size: 20px; color: var(--text-primary); line-height: 1.8; }
         .section a { color: var(--accent); text-decoration: none; }
@@ -320,7 +324,7 @@
         <div class="hero">
             <img src="images/profile.jpg" alt="Dheeraj Vattikonda" class="hero-photo" />
             <div class="hero-info">
-                <h1><span style="color: var(--accent); font-weight: 700;">Dheeraj</span> Vattikonda</h1>
+                <h1><span style="color: var(--name-accent); font-weight: 700;">Dheeraj</span> Vattikonda</h1>
                 <div class="subtitle">
                     Visiting Researcher, ServiceNow AI Research<br>
                     M.Sc. Student, McGill University &amp; Mila
@@ -373,6 +377,10 @@
                 </li>
                 <li>
                     <span class="news-date">Dec 2025</span>
+                    <span><a href="https://huggingface.co/blog/ServiceNow-AI/apriel-1p6-15b-thinker" target="_blank">Apriel-1.6-15b-Thinker</a> is out! A 15B reasoning model achieving frontier multimodal performance</span>
+                </li>
+                <li>
+                    <span class="news-date">Dec 2025</span>
                     <span>"How to Train Your LLM Web Agent" accepted at NeurIPS 2025</span>
                 </li>
                 <li>
@@ -402,6 +410,40 @@
             </ul>
             </div>
         </div>
+
+        <!-- ===== BLOGS ===== -->
+        <div class="section">
+            <h2>Blogs</h2>
+
+            <div class="pub">
+                <span class="pub-badge">FEB 2026</span>
+                <div class="pub-content">
+                    <div class="pub-title">
+                        <a href="https://emilianopp.github.io/Privileged-Information-Distillation-and-Self-Distillation/" target="_blank">Understanding Self-Distillation and Privileged Information Distillation</a>
+                    </div>
+                    <div class="pub-authors">Emiliano Penaloza, <strong>Dheeraj Vattikonda</strong>, Siddarth Venkatraman, Massimo Caccia</div>
+                    <div class="pub-venue">Blog post, Feb 2026</div>
+                    <div class="pub-links">
+                        <a href="https://emilianopp.github.io/Privileged-Information-Distillation-and-Self-Distillation/" target="_blank">blog</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pub">
+                <span class="pub-badge">DEC 2025</span>
+                <div class="pub-content">
+                    <div class="pub-title">
+                        <a href="https://huggingface.co/blog/ServiceNow-AI/apriel-1p6-15b-thinker" target="_blank">Apriel-1.6-15b-Thinker: Cost-efficient Frontier Multimodal Performance</a>
+                    </div>
+                    <div class="pub-authors">Sathwik Tejaswi Madhusudhan, Sagar Davasam, Torsten Scholak, Massimo Caccia, <strong>Dheeraj Vattikonda</strong>, and others</div>
+                    <div class="pub-venue">ServiceNow AI Research, Dec 2025</div>
+                    <div class="pub-links">
+                        <a href="https://huggingface.co/blog/ServiceNow-AI/apriel-1p6-15b-thinker" target="_blank">blog</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="section" id="publications">
             <h2>Publications</h2>
 
@@ -444,19 +486,6 @@
                     </div>
                 </div>
 
-                <div class="pub">
-                    <span class="pub-badge">BLOG 2025</span>
-                    <div class="pub-content">
-                        <div class="pub-title">
-                            <a href="https://huggingface.co/blog/ServiceNow-AI/apriel-1p6-15b-thinker" target="_blank">Apriel-1.6-15b-Thinker: Cost-efficient Frontier Multimodal Performance</a>
-                        </div>
-                        <div class="pub-authors">Sathwik Tejaswi Madhusudhan, Sagar Davasam, Torsten Scholak, Shruthan Radhakrishna, Aman Tiwari, Jash Mehta, Toby Liang, Kelechi Ogueji, Akintunde Oladipo, Masoud Hashemi, Rishabh Maheshwary, Pulkit Pattnaik, Saloni Mittal, Khalil Slimi, Akshay Kalkunte, Shiva Krishna Reddy Malay, Aanjaneya Shukla, Oluwanifemi Bamgbose, Massimo Caccia, <strong>Dheeraj Vattikonda</strong>, Jishnu S Nair, Varun Pandey, Shashank Maiya, Dhruv Jhamb, Nicolas Gontier, Patrice Bechard, Tayfun Tuna, Kavya Sriram, Denis Akhiyarov, Hari Subramani, Tara Bogavelli, Srinivas Sunkara</div>
-                        <div class="pub-venue">ServiceNow AI Research, Dec 2025</div>
-                        <div class="pub-links">
-                            <a href="https://huggingface.co/blog/ServiceNow-AI/apriel-1p6-15b-thinker" target="_blank">blog</a>
-                        </div>
-                    </div>
-                </div>
             </div>
 
             <!-- 2024 -->
