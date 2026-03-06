@@ -91,19 +91,47 @@
             background: var(--bg-nav); padding: 0 90px; display: flex;
             align-items: center; justify-content: space-between; height: 45px;
             position: sticky; top: 0; z-index: 100;
-            transition: background 0.3s;
+            transition: background 0.3s; flex-wrap: wrap;
         }
         nav .nav-name {
             font-family: 'Lato', Verdana, Helvetica, sans-serif;
             font-weight: 600; font-size: 1.4em; color: var(--nav-name);
             text-decoration: none;
         }
+        .nav-right { display: flex; align-items: center; }
         nav .nav-links { display: flex; align-items: center; }
         nav .nav-links a {
             color: var(--nav-link); text-decoration: none; font-size: 1.2em;
             font-weight: 400; margin-left: 28px; transition: color 0.2s;
         }
         nav .nav-links a:hover { color: var(--accent-light); }
+
+        /* Hamburger button */
+        .hamburger {
+            display: none; background: none; border: none; cursor: pointer;
+            flex-direction: column; gap: 4px; padding: 4px; margin-left: 20px;
+        }
+        .hamburger span {
+            display: block; width: 22px; height: 2px;
+            background: var(--nav-link); border-radius: 2px;
+            transition: background 0.2s;
+        }
+        .hamburger:hover span { background: var(--accent-light); }
+
+        /* Mobile dropdown menu */
+        .mobile-menu {
+            display: none; width: 100%;
+            flex-direction: column; padding: 10px 0;
+        }
+        .mobile-menu.open { display: flex; }
+        .mobile-menu a {
+            color: var(--nav-link); text-decoration: none;
+            font-size: 1.1em; padding: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            transition: color 0.2s;
+        }
+        .mobile-menu a:last-child { border-bottom: none; }
+        .mobile-menu a:hover { color: var(--accent-light); }
 
         /* Theme toggle button */
         .theme-toggle {
@@ -260,9 +288,10 @@
         @media (max-width: 700px) {
             body { font-size: 16px; }
 
-            nav { padding: 0 16px; height: 50px; }
+            nav { padding: 0 16px; min-height: 50px; height: auto; }
             nav .nav-name { font-size: 1.1em; }
-            nav .nav-links a { font-size: 0.95em; margin-left: 16px; }
+            nav .nav-links { display: none; }
+            .hamburger { display: flex; }
             .theme-toggle { margin-left: 16px; font-size: 1.1em; }
 
             .container { padding: 24px 16px 0; }
@@ -308,13 +337,24 @@
     <!-- ===== NAV ===== -->
     <nav>
         <a href="#" class="nav-name">Dheeraj Vattikonda</a>
-        <div class="nav-links">
-            <a href="#publications">Research</a>
-            <a href="#">Home</a>
+        <div class="nav-right">
+            <div class="nav-links">
+                <a href="#about">About</a>
+                <a href="#blogs">Blogs</a>
+                <a href="#publications">Publications</a>
+            </div>
             <button class="theme-toggle" aria-label="Toggle dark mode" onclick="toggleTheme()">
                 <span class="icon-moon">&#9790;</span>
                 <span class="icon-sun">&#9788;</span>
             </button>
+            <button class="hamburger" aria-label="Menu" onclick="toggleMenu()">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+        <div class="mobile-menu">
+            <a href="#about" onclick="toggleMenu()">About</a>
+            <a href="#blogs" onclick="toggleMenu()">Blogs</a>
+            <a href="#publications" onclick="toggleMenu()">Publications</a>
         </div>
     </nav>
 
@@ -340,8 +380,8 @@
         </div>
 
         <!-- ===== ABOUT ===== -->
-        <div class="section">
-            <h2>About Me</h2>
+        <div class="section" id="about">
+            <h2>About</h2>
             <p>
                 I work on reinforcement learning and reasoning with LLM agents in the Long Horizon Agents team under
                 <a href="https://optimass.github.io/" target="_blank">Massimo Caccia</a>
@@ -412,7 +452,7 @@
         </div>
 
         <!-- ===== BLOGS ===== -->
-        <div class="section">
+        <div class="section" id="blogs">
             <h2>Blogs</h2>
 
             <div class="pub">
@@ -569,6 +609,11 @@
     </footer>
 
     <script>
+        // ===== MOBILE MENU =====
+        function toggleMenu() {
+            document.querySelector('.mobile-menu').classList.toggle('open');
+        }
+
         // ===== THEME TOGGLE =====
         function toggleTheme() {
             const html = document.documentElement;
