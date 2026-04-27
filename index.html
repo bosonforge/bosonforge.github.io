@@ -1,639 +1,650 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Dheeraj Vattikonda — bosonforge</title>
-<meta name="description" content="Dheeraj Vattikonda — Researcher in RL and reasoning with LLM agents at ServiceNow AI Research and Mila. Terminal-style portfolio.">
-<link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dheeraj Vattikonda</title>
 
-<meta property="og:title" content="Dheeraj Vattikonda — bosonforge">
-<meta property="og:description" content="Researcher in RL and reasoning with LLM agents. ServiceNow AI Research · McGill · Mila.">
-<meta property="og:image" content="https://bosonforge.github.io/images/profile-square.jpg">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://bosonforge.github.io/">
+    <!-- SEO / Social sharing -->
+    <meta name="description" content="Dheeraj Vattikonda — Researcher working on reinforcement learning and reasoning with LLM agents at ServiceNow AI Research and Mila.">
+    <meta property="og:title" content="Dheeraj Vattikonda">
+    <meta property="og:description" content="Researcher working on RL and reasoning with LLM agents. ServiceNow AI Research · McGill · Mila.">
+    <meta property="og:image" content="images/profile.jpg">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Dheeraj Vattikonda">
+    <meta name="twitter:description" content="Researcher working on RL and reasoning with LLM agents. ServiceNow AI Research · McGill · Mila.">
+    <meta name="twitter:image" content="images/profile.jpg">
 
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Dheeraj Vattikonda — bosonforge">
-<meta name="twitter:description" content="Researcher in RL and reasoning with LLM agents. ServiceNow AI Research · McGill · Mila.">
-<meta name="twitter:image" content="https://bosonforge.github.io/images/profile-square.jpg">
+    <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+    <link rel="preload" href="images/profile.jpg" as="image">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..700&family=Lato:wght@300;400;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
 
-<style>
-  :root {
-    --bg: #161616;
-    --bg-elev: #1e1e1e;
-    --border: #383838;
-    --text: #ebe9e0;
-    --dim: #888888;
-    --green: #ff7a1f;        /* primary accent = vivid orange */
-    --blue: #7a9cb0;
-    --purple: #ffa566;       /* lighter orange for tags */
-    --orange: #ff9933;       /* heading orange */
-    --titlebar: #2a2a2a;
-  }
-  * { box-sizing: border-box; }
-  body {
-    margin: 0;
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'JetBrains Mono', 'Fira Code', 'SF Mono', Menlo, Consolas, monospace;
-    font-size: 15px;
-    line-height: 1.7;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 32px;
-  }
-  .terminal {
-    width: 100%;
-    max-width: 1140px;
-    background: var(--bg-elev);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    box-shadow: 0 28px 80px rgba(0, 0, 0, 0.55);
-    overflow: hidden;
-  }
-  .titlebar {
-    background: var(--titlebar);
-    padding: 12px 16px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    border-bottom: 1px solid var(--border);
-  }
-  .dot { width: 12px; height: 12px; border-radius: 50%; }
-  .dot.red    { background: #ff5f57; }
-  .dot.yellow { background: #febc2e; }
-  .dot.green  { background: #28c840; }
-  .titlebar-title {
-    flex: 1;
-    text-align: center;
-    color: var(--dim);
-    font-size: 12px;
-    letter-spacing: 0.3px;
-  }
-  .body { padding: 32px 36px 36px; position: relative; }
-  .corner-photo {
-    position: absolute;
-    top: 28px;
-    right: 32px;
-    width: 180px;
-    height: 180px;
-    border-radius: 12px;
-    object-fit: cover;
-    object-position: 50% 22%;
-    border: 1px solid var(--border);
-    box-shadow: 0 8px 24px rgba(255, 122, 31, 0.22);
-    z-index: 5;
-  }
-  .boot { color: var(--dim); font-size: 12.5px; margin-bottom: 18px; }
-  .boot .ok { color: var(--green); }
-  .prompt .user { color: var(--green); }
-  .prompt .host { color: var(--blue); }
-  .prompt .path { color: var(--purple); }
-  .nav {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-    margin: 18px 0 22px;
-  }
-  .nav-btn {
-    background: transparent;
-    border: 1px solid var(--border);
-    color: var(--text);
-    font-family: inherit;
-    font-size: 13px;
-    padding: 10px 14px;
-    border-radius: 6px;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    transition: all 0.15s ease;
-  }
-  .nav-btn:hover {
-    border-color: var(--green);
-    color: var(--green);
-    background: rgba(126, 231, 135, 0.06);
-    transform: translateY(-1px);
-  }
-  .nav-btn.active {
-    border-color: var(--green);
-    color: var(--green);
-    background: rgba(126, 231, 135, 0.10);
-  }
-  .nav-btn svg { width: 14px; height: 14px; }
-  .output {
-    border-left: 2px solid var(--border);
-    padding: 6px 0 6px 14px;
-    margin-top: 10px;
-    min-height: 160px;
-  }
-  .output h2 {
-    color: var(--orange);
-    font-size: 14px;
-    margin: 0 0 12px 0;
-    font-weight: 600;
-  }
-  .output p  { margin: 0 0 10px 0; }
-  .output a  { color: var(--blue); text-decoration: none; }
-  .output a:hover { text-decoration: underline; }
-  .output ul { padding-left: 16px; margin: 8px 0; }
-  .output li { margin-bottom: 6px; }
-  .date { color: var(--dim); }
-  .dim  { color: var(--dim); }
-  .tag  { color: var(--purple); }
-  .me   { color: var(--green); font-weight: 600; }
-  .output strong { color: var(--text); }
-  .tree {
-    margin: 0;
-    padding: 4px 0 0 0;
-    white-space: pre;
-    overflow-x: auto;
-    line-height: 1.75;
-    font-size: 14px;
-    font-family: inherit;
-  }
-  .tree strong { color: var(--text); font-weight: 600; }
-  .tree a { color: var(--blue); text-decoration: none; }
-  .tree a:hover { text-decoration: underline; }
-  .tree::-webkit-scrollbar { height: 6px; }
-  .tree::-webkit-scrollbar-track { background: transparent; }
-  .tree::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
-  .boot div { animation: fadeIn 0.18s ease-out; }
-  @keyframes fadeIn { from { opacity: 0; transform: translateY(-2px); } to { opacity: 1; transform: none; } }
-  .profile-row {
-    display: flex;
-    gap: 20px;
-    align-items: flex-start;
-    margin-bottom: 14px;
-  }
-  .profile-img {
-    width: 130px;
-    height: 130px;
-    border-radius: 6px;
-    border: 1px solid var(--border);
-    object-fit: cover;
-    flex-shrink: 0;
-    box-shadow: 0 6px 20px rgba(217, 119, 87, 0.12);
-  }
-  .profile-row .bio { flex: 1; min-width: 0; }
-  .profile-row .bio p:first-child { margin-top: 0; }
-  .cursor {
-    display: inline-block;
-    width: 8px; height: 15px;
-    background: var(--green);
-    vertical-align: -2px;
-    animation: blink 1s steps(2) infinite;
-    margin-left: 4px;
-  }
-  @keyframes blink { 50% { opacity: 0; } }
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
 
-  /* ===== TYPING INPUT ===== */
-  .prompt-line {
-    position: relative;
-    cursor: text;
-  }
-  #typed-text { color: var(--text); }
-  #cmd-input {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: transparent;
-    border: none;
-    outline: none;
-    font: inherit;
-    color: transparent;
-    caret-color: transparent;
-    padding: 0;
-    margin: 0;
-    z-index: 2;
-  }
-  #cmd-input:focus { outline: none; }
+        /* ===== THEME VARIABLES ===== */
+        :root {
+            --bg: #fff;
+            --bg-nav: #000;
+            --bg-card: #f3f4f6;
+            --text-primary: #222;
+            --text-secondary: #333;
+            --text-muted: #555;
+            --text-heading: #000;
+            --accent: #b509ac;
+            --accent-hover: #9a078f;
+            --accent-light: #c93dc2;
+            --border: #e2e8f0;
+            --border-light: #f1f5f9;
+            --nav-link: #fff;
+            --nav-name: #fff;
+            --sep: #999;
+            --scrollbar: #cbd5e1;
+            --photo-border: #b509ac;
+            --pub-title: #000;
+            --section-heading: var(--accent);
+            --name-accent: var(--accent);
 
-  @media (max-width: 640px) {
-    body { padding: 10px; }
-    .terminal { border-radius: 8px; }
-    .titlebar { padding: 8px 10px; }
-    .titlebar .dot { width: 10px; height: 10px; }
-    .titlebar-title { font-size: 10.5px; }
-    .body { padding: 18px 16px 22px; font-size: 12.5px; }
-    .corner-photo {
-      width: 100px; height: 100px;
-      top: 16px; right: 16px;
-      border-radius: 8px;
-    }
-    .boot { font-size: 11px; padding-right: 116px; line-height: 1.55; margin-bottom: 16px; }
-    .nav { gap: 6px; margin: 14px 0 16px; }
-    .nav-btn { font-size: 11.5px; padding: 7px 10px; gap: 6px; border-radius: 5px; }
-    .nav-btn svg { width: 12px; height: 12px; }
-    .output { padding-left: 10px; }
-    .output h2 { font-size: 12.5px; margin-bottom: 8px; }
-    .output p { font-size: 12.5px; line-height: 1.6; }
-    .output ul { padding-left: 14px; }
-    .output li { font-size: 12.5px; line-height: 1.55; }
-    .tree { font-size: 10.5px; line-height: 1.65; }
-    .date { font-size: 11px; }
-    .cursor { width: 7px; height: 12px; }
-  }
+            --gradient-end: #fff;
+            --strong-color: inherit;
+        }
 
-  @media (max-width: 900px) and (min-width: 641px) {
-    .terminal { max-width: 100%; }
-    .corner-photo { width: 130px; height: 130px; }
-    .body { padding: 24px 24px 28px; }
-  }
-</style>
+        [data-theme="dark"] {
+            --bg: #111111;
+            --bg-nav: #0a0a0a;
+            --bg-card: #1a1a1a;
+            --text-primary: #d4d4d4;
+            --text-secondary: #aaaaaa;
+            --text-muted: #888888;
+            --text-heading: #ffffff;
+            --accent: #5ba3b8;
+            --accent-hover: #7ec4d8;
+            --accent-light: #7ec4d8;
+            --border: #3a3a3a;
+            --border-light: #353535;
+            --nav-link: #d4d4d4;
+            --nav-name: #ffffff;
+            --sep: #666;
+            --scrollbar: #444444;
+            --photo-border: #5ba3b8;
+            --pub-title: #ffffff;
+            --section-heading: #ffffff;
+            --name-accent: #ffffff;
+
+            --gradient-end: #111111;
+            --strong-color: #e0e0e0;
+        }
+
+        body {
+            font-family: 'Lato', Verdana, Helvetica, sans-serif;
+            line-height: 1.7; color: var(--text-primary); background: var(--bg); font-size: 17px;
+            -webkit-font-smoothing: antialiased;
+            transition: background 0.3s, color 0.3s;
+            padding-top: 45px;
+        }
+
+        /* ===== NAV BAR ===== */
+        nav {
+            background: var(--bg-nav); height: 45px;
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            transition: background 0.3s;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .nav-inner {
+            max-width: 820px; width: 100%; padding: 0 30px;
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        nav .nav-name {
+            font-family: 'Lato', Verdana, Helvetica, sans-serif;
+            font-weight: 600; font-size: 1.4em; color: var(--nav-name);
+            text-decoration: none;
+        }
+        .nav-right { display: flex; align-items: center; position: relative; }
+        nav .nav-links { display: none; }
+        nav .nav-links a {
+            color: var(--nav-link); text-decoration: none; font-size: 1.2em;
+            font-weight: 400; margin-left: 28px; transition: color 0.2s;
+        }
+        nav .nav-links a:hover { color: var(--accent-light); }
+
+        /* Hamburger button */
+        .hamburger {
+            display: flex; background: none; border: none; cursor: pointer;
+            flex-direction: column; gap: 4px; padding: 4px; margin-left: 20px;
+        }
+        .hamburger span {
+            display: block; width: 22px; height: 2px;
+            background: var(--nav-link); border-radius: 2px;
+            transition: background 0.2s;
+        }
+        .hamburger:hover span { background: var(--accent-light); }
+
+        /* Dropdown menu */
+        .mobile-menu {
+            display: none; position: absolute; top: 100%; right: 0;
+            flex-direction: column; padding: 6px 0;
+            background: var(--bg-nav);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            min-width: 140px; z-index: 200;
+        }
+        .mobile-menu.open { display: flex; }
+        .mobile-menu a {
+            color: var(--nav-link); text-decoration: none;
+            font-size: 0.9em; padding: 8px 16px;
+            transition: color 0.2s, background 0.2s;
+        }
+        .mobile-menu a:hover { color: var(--accent-light); background: rgba(255,255,255,0.05); }
+
+        /* Theme toggle button */
+        .theme-toggle {
+            background: none; border: none; cursor: pointer;
+            margin-left: 28px; font-size: 1.3em; padding: 4px;
+            color: var(--nav-link); transition: color 0.2s;
+            display: flex; align-items: center;
+        }
+        .theme-toggle:hover { color: var(--accent-light); }
+        .theme-toggle .icon-sun,
+        .theme-toggle .icon-moon { display: none; }
+        :root .theme-toggle .icon-moon { display: inline; }
+        [data-theme="dark"] .theme-toggle .icon-moon { display: none; }
+        [data-theme="dark"] .theme-toggle .icon-sun { display: inline; }
+
+        /* ===== MAIN CONTAINER ===== */
+        .container {
+            max-width: 820px; margin: 0 auto; padding: 50px 30px 0;
+        }
+
+        /* ===== HERO / PROFILE ===== */
+        .hero {
+            display: flex; align-items: flex-start; gap: 100px;
+            margin-bottom: 30px; padding: 20px 0;
+            position: relative;
+        }
+        .hero-photo {
+            width: 220px; height: 220px; border-radius: 30%;
+            object-fit: cover; flex-shrink: 0;
+            border: none; box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            position: relative; z-index: 1;
+            transition: border-color 0.3s;
+        }
+        .hero-info { flex: 1; position: relative; z-index: 1; }
+        .hero-info h1 {
+            font-family: 'Lato', Verdana, Helvetica, sans-serif;
+            font-size: 52px; font-weight: 500; color: var(--text-heading);
+            margin-bottom: 14px; line-height: 1.2;
+        }
+        .hero-info .subtitle {
+            font-size: 22px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 28px;
+        }
+        .hero-links { display: flex; align-items: center; gap: 10px; font-size: 17px; flex-wrap: wrap; }
+        .hero-links a { color: var(--text-secondary); text-decoration: none; }
+        .hero-links a:hover { text-decoration: underline; color: var(--text-primary); }
+        .hero-links .x-link { color: var(--text-secondary); }
+        .hero-links .x-link:hover { color: var(--text-primary); }
+        .hero-links .sep { color: var(--sep); margin: 0 4px; }
+
+        /* ===== SECTIONS ===== */
+        .section {
+            margin-top: 40px;
+            padding-top: 40px;
+            border-top: none;
+        }
+        .section:first-of-type { border-top: none; padding-top: 0; }
+        .section h2 {
+            font-family: 'Lato', Verdana, Helvetica, sans-serif;
+            font-size: 2.8rem; font-weight: 400; color: var(--section-heading);
+            margin-bottom: 30px; padding-bottom: 10px;
+            display: inline-block;
+            border-bottom: 3px solid var(--section-heading);
+        }
+        .section p { margin-bottom: 18px; font-size: 17px; color: var(--text-primary); line-height: 1.7; }
+        .section a { color: var(--accent); text-decoration: none; }
+        .section a:hover { text-decoration: underline; color: var(--accent-hover); }
+
+        /* ===== NEWS ===== */
+        .news-wrapper { position: relative; }
+        .news-wrapper::after {
+            content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+            height: 80px; background: linear-gradient(rgba(255,255,255,0), var(--gradient-end) 70%);
+            pointer-events: none;
+        }
+        .news-list {
+            list-style: none; padding: 0 0 60px 0;
+            max-height: 300px; overflow-y: auto;
+            scrollbar-width: thin; scrollbar-color: var(--scrollbar) transparent;
+        }
+        .news-list::-webkit-scrollbar { width: 5px; }
+        .news-list::-webkit-scrollbar-track { background: transparent; }
+        .news-list::-webkit-scrollbar-thumb { background: var(--scrollbar); border-radius: 4px; }
+        .news-list li {
+            display: flex; gap: 16px; padding: 8px 0; font-size: 16px;
+            line-height: 1.5; border-bottom: 1px solid var(--border-light);
+        }
+        .news-list li:last-child { border-bottom: none; }
+        .news-date {
+            flex-shrink: 0; min-width: 100px; font-weight: 700;
+            color: var(--text-primary); font-size: 15px;
+        }
+        .news-list a { color: var(--accent); }
+        .news-list a:hover { color: var(--accent-hover); }
+        .news-list strong { color: var(--strong-color); }
+
+        /* ===== PUBLICATIONS ===== */
+        .pub-year-group { margin-bottom: 20px; }
+        .pub-year-label {
+            font-size: 3rem; font-weight: 300; color: var(--border);
+            float: right; margin-left: 30px; line-height: 1;
+        }
+        .pub {
+            display: flex; gap: 24px; align-items: flex-start;
+            padding: 30px 0;
+            border-top: 1px solid var(--border);
+        }
+        .pub-badge {
+            flex-shrink: 0;
+            background: var(--accent); color: #fff;
+            font-size: 13px; font-weight: 700;
+            padding: 4px 12px; border-radius: 4px;
+            white-space: nowrap; margin-top: 4px;
+        }
+        .pub-content { flex: 1; min-width: 0; }
+        .pub-title {
+            font-size: 17px; font-weight: 400; line-height: 1.4;
+            margin-bottom: 6px;
+        }
+        .pub-title a { color: var(--accent); text-decoration: none; }
+        .pub-title a:hover { text-decoration: underline; color: var(--accent-hover); }
+        .pub-authors { font-size: 17px; color: var(--text-primary); margin-bottom: 6px; line-height: 1.5; }
+        .pub-venue { font-size: 17px; color: var(--text-primary); font-style: italic; margin-bottom: 10px; }
+        .pub-links { font-size: 15px; }
+        .pub-links a {
+            color: var(--text-primary); text-decoration: none; margin-right: 10px;
+            font-weight: 400; border: 1px solid var(--border);
+            padding: 2px 10px; border-radius: 3px;
+            transition: border-color 0.2s;
+        }
+        .pub-links a:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
+
+        /* ===== EDUCATION ===== */
+        .edu-item {
+            display: flex; gap: 16px; align-items: baseline;
+            margin-bottom: 14px; font-size: 15px;
+        }
+        .edu-year {
+            flex-shrink: 0; min-width: 100px; font-weight: 600;
+            color: var(--text-primary); font-size: 14px;
+        }
+        .edu-detail { color: var(--text-secondary); }
+        .edu-sub { color: var(--text-muted); font-size: 14px; }
+
+        /* ===== FOOTER ===== */
+        footer {
+            max-width: 820px; margin: 50px auto 0; padding: 40px 30px;
+            border-top: 1px solid var(--border); text-align: center;
+            font-size: 13px; color: var(--text-muted);
+        }
+        footer a { color: var(--text-muted); text-decoration: none; }
+        footer a:hover { text-decoration: underline; color: var(--accent); }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 700px) {
+            body { font-size: 16px; }
+
+            .nav-inner { max-width: 100%; padding: 0 16px; }
+            nav .nav-name { font-size: 1.1em; }
+            .theme-toggle { margin-left: 16px; font-size: 1.1em; }
+
+            .container { padding: 24px 16px 0; }
+
+            .hero {
+                flex-direction: column; align-items: center;
+                text-align: center; gap: 24px; margin-bottom: 40px;
+            }
+            .hero-photo { width: 140px; height: 140px; }
+            .hero-info h1 { font-size: 32px; margin-bottom: 10px; }
+            .hero-info .subtitle { font-size: 17px; margin-bottom: 18px; }
+            .hero-links { justify-content: center; font-size: 15px; }
+
+            .section { margin-top: 40px; padding-top: 40px; }
+            .section h2 { font-size: 1.8rem; margin-bottom: 20px; }
+            .section p { font-size: 16px; margin-bottom: 16px; }
+
+            .news-wrapper::after { height: 30px; }
+            .news-list { max-height: 300px; }
+            .news-list li {
+                flex-direction: column; gap: 4px;
+                font-size: 15px; padding: 10px 0;
+            }
+            .news-date { font-size: 15px; min-width: auto; }
+
+            .pub-year-label { font-size: 2rem; float: none; margin: 0 0 10px; }
+            .pub { flex-direction: column; gap: 10px; padding: 20px 0; }
+            .pub-badge { align-self: flex-start; }
+            .pub-title { font-size: 17px; }
+            .pub-authors { font-size: 14px; }
+            .pub-venue { font-size: 14px; }
+            .pub-links { font-size: 13px; }
+            .pub-links a { margin-right: 8px; }
+
+            .edu-item { flex-direction: column; gap: 2px; }
+
+            footer { padding: 40px 16px; font-size: 12px; }
+        }
+    </style>
 </head>
 <body>
-  <div class="terminal">
-    <div class="titlebar">
-      <div class="dot red"></div>
-      <div class="dot yellow"></div>
-      <div class="dot green"></div>
-      <div class="titlebar-title">dheeraj@bosonforge:~</div>
-    </div>
-    <div class="body">
-      <img class="corner-photo" src="images/profile-square.jpg" alt="Dheeraj Vattikonda">
-      <div class="boot" id="boot"></div>
 
-      <div>
-        <span class="prompt">
-          <span class="user">dheeraj</span>@<span class="host">bosonforge</span>:<span class="path">~</span>$
-        </span>
-        <span id="current-cmd">whoami</span>
+    <!-- ===== NAV ===== -->
+    <nav>
+      <div class="nav-inner">
+        <a href="#" class="nav-name">Dheeraj Vattikonda</a>
+        <div class="nav-right">
+            <div class="nav-links">
+                <a href="#about">About</a>
+                <a href="#blogs">Blogs</a>
+                <a href="#publications">Publications</a>
+            </div>
+            <button class="theme-toggle" aria-label="Toggle dark mode" onclick="toggleTheme()">
+                <span class="icon-moon">&#9790;</span>
+                <span class="icon-sun">&#9788;</span>
+            </button>
+            <button class="hamburger" aria-label="Menu" onclick="toggleMenu()">
+                <span></span><span></span><span></span>
+            </button>
+            <div class="mobile-menu">
+                <a href="#about" onclick="toggleMenu()">About</a>
+                <a href="#news" onclick="toggleMenu()">News</a>
+                <a href="#blogs" onclick="toggleMenu()">Blogs</a>
+                <a href="#publications" onclick="toggleMenu()">Publications</a>
+            </div>
+        </div>
       </div>
+    </nav>
 
-      <div class="nav" id="nav"></div>
+    <div class="container">
 
-      <div id="output" class="output"></div>
+        <!-- ===== HERO ===== -->
+        <div class="hero">
+            <img src="images/profile.jpg" alt="Dheeraj Vattikonda" class="hero-photo" />
+            <div class="hero-info">
+                <h1><span style="color: var(--name-accent); font-weight: 700;">Dheeraj</span> Vattikonda</h1>
+                <div class="subtitle">
+                    Visiting Researcher, ServiceNow AI Research<br>
+                    M.Sc. Student, McGill University &amp; Mila
+                </div>
+                <div class="hero-links">
+                    <a href="https://scholar.google.com/citations?user=XJtv0zoAAAAJ" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="vertical-align: -3px; margin-right: 4px;"><path d="M5.242 13.769L0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.548 1.748-6.758 4.269zM12 10a7 7 0 1 0 0 14 7 7 0 0 0 0-14z"/></svg>Google Scholar</a>
+                    <span class="sep">/</span>
+                    <a href="https://x.com/dheeraj_46329" target="_blank"><span class="x-link">&#120143;</span> @dheeraj_46329</a>
+                    <span class="sep">/</span>
+                    <a href="https://www.linkedin.com/in/dheeraj-vattikonda-429619184" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="vertical-align: -3px; margin-right: 4px;"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>LinkedIn</a>
+                </div>
+            </div>
+        </div>
 
-      <div class="prompt-line" id="prompt-line" style="margin-top: 18px;">
-        <span class="prompt">
-          <span class="user">dheeraj</span>@<span class="host">bosonforge</span>:<span class="path">~</span>$
-        </span>
-        <span id="typed-text"></span><span class="cursor"></span>
-        <input id="cmd-input" type="text" autocomplete="off" spellcheck="false" autocapitalize="off" aria-label="Type a command">
-      </div>
+        <!-- ===== ABOUT ===== -->
+        <div class="section" id="about">
+            <h2>About</h2>
+            <p>
+                I work on reinforcement learning and reasoning with LLM agents in the Long Horizon Agents team under
+                <a href="https://optimass.github.io/" target="_blank">Massimo Caccia</a>
+                at <a href="https://www.servicenow.com/research/" target="_blank">ServiceNow AI Research</a>, based out of Montreal.
+                I am also a Master's student at <a href="https://www.mcgill.ca/" target="_blank">McGill University</a>
+                and <a href="https://mila.quebec/en/" target="_blank">Mila</a> under the guidance of
+                <a href="https://www.cs.mcgill.ca/~xueliu/" target="_blank">Xue (Steve) Liu</a>.
+                My current research revolves around reasoning in LLM web agents and tool-calling systems. My recent work on web agent training received an
+                <a href="https://slideslive.com/39044475/how-to-train-your-llm-web-agent-a-statistical-diagnosis" target="_blank">oral presentation</a>
+                at ICML and will appear at NeurIPS 2025.
+            </p>
+            <p>
+                I completed my Bachelor's in Electronics and Communication Engineering at
+                <a href="https://nith.ac.in/" target="_blank">NIT Hamirpur</a>.
+                During my undergrad, I worked as a researcher at <a href="https://mila.quebec/en/" target="_blank">Mila</a> and
+                <a href="https://home.iitd.ac.in/" target="_blank">IIT Delhi</a>,
+                focusing on robot perception, differentiable SLAM systems, and LiDAR-based perception tasks for autonomous navigation.
+            </p>
+        </div>
+
+        <!-- ===== NEWS ===== -->
+        <div class="section" id="news">
+            <h2>News</h2>
+            <div class="news-wrapper">
+            <ul class="news-list">
+                <li>
+                    <span class="news-date">Feb 2026</span>
+                    <span>New paper: <a href="https://arxiv.org/abs/2602.04942">&pi;-Distill &mdash; Privileged Information Distillation for Language Models</a></span>
+                </li>
+                <li>
+                    <span class="news-date">Feb 2026</span>
+                    <span>Check out our <a href="https://emilianopp.github.io/Privileged-Information-Distillation-and-Self-Distillation/" target="_blank">blog</a> on Self-Distillation and Privileged Information Distillation</span>
+                </li>
+                <li>
+                    <span class="news-date">Dec 2025</span>
+                    <span><a href="https://huggingface.co/blog/ServiceNow-AI/apriel-1p6-15b-thinker" target="_blank">Apriel-1.6-15b-Thinker</a> is out! A 15B reasoning model achieving frontier multimodal performance</span>
+                </li>
+                <li>
+                    <span class="news-date">Dec 2025</span>
+                    <span>"How to Train Your LLM Web Agent" accepted at NeurIPS 2025</span>
+                </li>
+                <li>
+                    <span class="news-date">Jul 2025</span>
+                    <span><a href="https://slideslive.com/39044475/how-to-train-your-llm-web-agent-a-statistical-diagnosis">Oral presentation</a> at ICML 2025 CUA Workshop</span>
+                </li>
+                <li>
+                    <span class="news-date">Dec 2024</span>
+                    <span>Aurora accepted as <strong>Spotlight</strong> at NeurIPS 2024</span>
+                </li>
+                <li>
+                    <span class="news-date">Aug 2024</span>
+                    <span>Started as Visiting Researcher at <a href="https://www.servicenow.com/research/" target="_blank">ServiceNow AI Research</a></span>
+                </li>
+                <li>
+                    <span class="news-date">Aug 2023</span>
+                    <span>Started M.Sc. at <a href="https://mila.quebec/en/" target="_blank">Mila</a> / <a href="https://www.mcgill.ca/" target="_blank">McGill University</a></span>
+                </li>
+                <li>
+                    <span class="news-date">Nov 2022</span>
+                    <span>Started research internship at <a href="https://home.iitd.ac.in/" target="_blank">IIT Delhi</a></span>
+                </li>
+                <li>
+                    <span class="news-date">Jan 2022</span>
+                    <span>Started research internship at <a href="https://mila.quebec/en/" target="_blank">Mila</a></span>
+                </li>
+            </ul>
+            </div>
+        </div>
+
+        <!-- ===== BLOGS ===== -->
+        <div class="section" id="blogs">
+            <h2>Blogs</h2>
+
+            <div class="pub">
+                <span class="pub-badge">FEB 2026</span>
+                <div class="pub-content">
+                    <div class="pub-title">
+                        <a href="https://emilianopp.github.io/Privileged-Information-Distillation-and-Self-Distillation/" target="_blank">Understanding Self-Distillation and Privileged Information Distillation</a>
+                    </div>
+                    <div class="pub-authors">Emiliano Penaloza, <strong>Dheeraj Vattikonda</strong>, Siddarth Venkatraman, Massimo Caccia</div>
+                    <div class="pub-venue">Blog post, Feb 2026</div>
+                    <div class="pub-links">
+                        <a href="https://emilianopp.github.io/Privileged-Information-Distillation-and-Self-Distillation/" target="_blank">blog</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pub">
+                <span class="pub-badge">DEC 2025</span>
+                <div class="pub-content">
+                    <div class="pub-title">
+                        <a href="https://huggingface.co/blog/ServiceNow-AI/apriel-1p6-15b-thinker" target="_blank">Apriel-1.6-15b-Thinker: Cost-efficient Frontier Multimodal Performance</a>
+                    </div>
+                    <div class="pub-authors">Sathwik Tejaswi Madhusudhan, Sagar Davasam, Torsten Scholak, Massimo Caccia, <strong>Dheeraj Vattikonda</strong>, and others</div>
+                    <div class="pub-venue">ServiceNow AI Research, Dec 2025</div>
+                    <div class="pub-links">
+                        <a href="https://huggingface.co/blog/ServiceNow-AI/apriel-1p6-15b-thinker" target="_blank">blog</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" id="publications">
+            <h2>Publications</h2>
+
+            <!-- 2026 -->
+            <div class="pub-year-group">
+                <span class="pub-year-label">2026</span>
+
+                <div class="pub">
+                    <span class="pub-badge">ARXIV 2026</span>
+                    <div class="pub-content">
+                        <div class="pub-title">
+                            <a href="https://arxiv.org/abs/2602.04942" target="_blank">Privileged Information Distillation for Language Models</a>
+                        </div>
+                        <div class="pub-authors">Emiliano Pe&ntilde;aloza, <strong>Dheeraj Vattikonda</strong>, Nicolas Gontier, Alexandre Lacoste, Laurent Charlin, Massimo Caccia</div>
+                        <div class="pub-venue">arXiv preprint, Feb 2026</div>
+                        <div class="pub-links">
+                            <a href="https://arxiv.org/abs/2602.04942" target="_blank">paper</a>
+                            <a href="https://emilianopp.github.io/Privileged-Information-Distillation-and-Self-Distillation/" target="_blank">blog</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2025 -->
+            <div class="pub-year-group">
+                <span class="pub-year-label">2025</span>
+
+                <div class="pub">
+                    <span class="pub-badge">NeurIPS 2025</span>
+                    <div class="pub-content">
+                        <div class="pub-title">
+                            <a href="https://arxiv.org/abs/2507.04103" target="_blank">How to Train Your LLM Web Agent: A Statistical Diagnosis</a>
+                        </div>
+                        <div class="pub-authors"><strong>Dheeraj Vattikonda</strong>, Santhoshi Ravichandran, Emiliano Penaloza, Hadi Nekoei, Megh Thakkar, Thibault Le Sellier de Chezelles, Nicolas Gontier, Miguel Mu&ntilde;oz-M&aacute;rmol, Sahar Omidi Shayegan, Stefania Raimondo, Xue Liu, Alexandre Drouin, Laurent Charlin, Alexandre Pich&eacute;, Alexandre Lacoste, Massimo Caccia</div>
+                        <div class="pub-venue">ICML 2025 CUA Workshop (Oral) &middot; NeurIPS 2025</div>
+                        <div class="pub-links">
+                            <a href="https://arxiv.org/abs/2507.04103" target="_blank">paper</a>
+                            <a href="https://www.youtube.com/watch?v=zTI4kFqy9dw" target="_blank">slides</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- 2024 -->
+            <div class="pub-year-group">
+                <span class="pub-year-label">2024</span>
+
+                <div class="pub">
+                    <span class="pub-badge">NeurIPS 2024</span>
+                    <div class="pub-content">
+                        <div class="pub-title">
+                            <a href="https://arxiv.org/abs/2407.03471" target="_blank">Learning Action and Reasoning-Centric Image Editing from Videos and Simulations</a>
+                        </div>
+                        <div class="pub-authors">Benno Krojer, <strong>Dheeraj Vattikonda</strong>, Luis Lara, Varun Jampani, Eva Portelance, Christopher Pal, Siva Reddy</div>
+                        <div class="pub-venue">NeurIPS 2024 (Spotlight)</div>
+                        <div class="pub-links">
+                            <a href="https://arxiv.org/abs/2407.03471" target="_blank">paper</a>
+                            <a href="https://aurora-editing.github.io/" target="_blank">website</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pub">
+                    <span class="pub-badge">ICIPCW 2024</span>
+                    <div class="pub-content">
+                        <div class="pub-title">
+                            <a href="https://arxiv.org/abs/2504.03089" target="_blank">SLACK: Attacking LiDAR-based SLAM with Adversarial Point Injections</a>
+                        </div>
+                        <div class="pub-authors">Prashant Kumar, <strong>Dheeraj Vattikonda</strong>, Kshitij Madhav Bhat, Kunal Dargan, Prem Kalra</div>
+                        <div class="pub-venue">ICIPCW 2024</div>
+                        <div class="pub-links">
+                            <a href="https://arxiv.org/abs/2504.03089" target="_blank">paper</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2023 -->
+            <div class="pub-year-group">
+                <span class="pub-year-label">2023</span>
+
+                <div class="pub">
+                    <span class="pub-badge">BMVC 2023</span>
+                    <div class="pub-content">
+                        <div class="pub-title">
+                            <a href="https://arxiv.org/abs/2309.09206" target="_blank">Differentiable SLAM Helps Deep Learning-based LiDAR Perception Tasks</a>
+                        </div>
+                        <div class="pub-authors">Prashant Kumar, <strong>Dheeraj Vattikonda</strong>, Vedang Bhupesh Shenvi Nadkarni, Erqun Dong, Sabyasachi Sahoo</div>
+                        <div class="pub-venue">BMVC 2023</div>
+                        <div class="pub-links">
+                            <a href="https://arxiv.org/abs/2309.09206" target="_blank">paper</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2022 -->
+            <div class="pub-year-group">
+                <span class="pub-year-label">2022</span>
+
+                <div class="pub">
+                    <span class="pub-badge">IROS 2022</span>
+                    <div class="pub-content">
+                        <div class="pub-title">
+                            <a href="https://openreview.net/forum?id=tvPtqbjsKgX" target="_blank">Grad-LiDAR-SLAM: Fully Differentiable Global SLAM for LiDAR with Pose-Graph Optimization</a>
+                        </div>
+                        <div class="pub-authors"><strong>Dheeraj Vattikonda</strong>, Aryan FNU, Erqun Dong, Sabyasachi Sahoo</div>
+                        <div class="pub-venue">IROS 2022</div>
+                        <div class="pub-links">
+                            <a href="https://openreview.net/pdf?id=tvPtqbjsKgX" target="_blank">paper</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
-  </div>
 
-<script>
-  const sections = {
-    about: {
-      cmd: 'cat about.md',
-      label: 'about',
-      icon: '<svg viewBox="0 0 16 16" fill="currentColor"><circle cx="8" cy="5" r="3"/><path d="M2 14c0-3 2.7-5 6-5s6 2 6 5v1H2v-1z"/></svg>',
-      content: `
-        <h2>## about</h2>
-        <p>I work on reinforcement learning and reasoning with LLM agents in the
-        <span class="tag">Long Horizon Agents</span> team under
-        <a href="https://optimass.github.io/" target="_blank">Massimo Caccia</a> at
-        <a href="https://www.servicenow.com/research/" target="_blank"><span class="tag">ServiceNow AI Research</span></a>,
-        based out of Montreal.</p>
+    <!-- ===== FOOTER ===== -->
+    <footer>
+        Built with &#129391; in Montreal &middot; Designed with <a href="https://claude.ai/claude-code" target="_blank"><img src="images/claude-icon.svg" alt="Claude" width="16" height="16" style="vertical-align: -2px; margin-right: 3px;">Claude Code</a><br>
+        Last updated February 2026
+    </footer>
 
-        <p>I am also a Master's student at
-        <a href="https://www.mcgill.ca/" target="_blank"><span class="tag">McGill</span></a> &amp;
-        <a href="https://mila.quebec/en/" target="_blank"><span class="tag">Mila</span></a>
-        under the guidance of <a href="https://www.cs.mcgill.ca/~xueliu/" target="_blank">Xue (Steve) Liu</a>.
-        My current research revolves around reasoning in LLM web agents
-        and tool-calling systems. My recent work on web agent training received an
-        <a href="https://slideslive.com/39044475/how-to-train-your-llm-web-agent-a-statistical-diagnosis" target="_blank">oral presentation</a>
-        at ICML and will appear at NeurIPS 2025.</p>
-
-        <h2 style="margin-top:18px">## background</h2>
-        <p>I completed my Bachelor's in Electronics and Communication Engineering at
-        <a href="https://nith.ac.in/" target="_blank">NIT Hamirpur</a>. During my undergrad,
-        I worked as a researcher at <a href="https://mila.quebec/en/" target="_blank">Mila</a> and
-        <a href="https://home.iitd.ac.in/" target="_blank">IIT Delhi</a>, focusing on robot
-        perception, differentiable SLAM systems, and LiDAR-based perception tasks for
-        autonomous navigation.</p>
-      `
-    },
-    news: {
-      cmd: 'tail -n 20 news.log',
-      label: 'news',
-      icon: '<svg viewBox="0 0 16 16" fill="currentColor"><path d="M2 2h12v2H2zM2 6h12v1.5H2zM2 9.5h12v1.5H2zM2 13h8v1.5H2z"/></svg>',
-      content: `
-        <h2>## news</h2>
-        <ul>
-          <li><span class="date">[Feb 2026]</span> new paper: <strong>π-Distill — Privileged Information Distillation for Language Models</strong> &middot; <a href="https://arxiv.org/abs/2602.04942">arxiv</a></li>
-          <li><span class="date">[Feb 2026]</span> blog: <em>Self-Distillation and Privileged Information Distillation</em></li>
-          <li><span class="date">[Dec 2025]</span> released <strong>Apriel-1.6-15b-Thinker</strong> — a 15B reasoning model achieving frontier multimodal performance</li>
-          <li><span class="date">[Dec 2025]</span> <em>How to Train Your LLM Web Agent</em> accepted at NeurIPS 2025</li>
-          <li><span class="date">[Jul 2025]</span> oral presentation at ICML 2025 CUA Workshop</li>
-          <li><span class="date">[Dec 2024]</span> Aurora accepted as <span class="tag">Spotlight</span> at NeurIPS 2024</li>
-          <li><span class="date">[Aug 2024]</span> started as Visiting Researcher at ServiceNow AI Research</li>
-          <li><span class="date">[Aug 2023]</span> started M.Sc. at Mila / McGill</li>
-          <li><span class="date">[Nov 2022]</span> research internship at IIT Delhi</li>
-          <li><span class="date">[Jan 2022]</span> research internship at Mila</li>
-        </ul>
-      `
-    },
-    publications: {
-      cmd: 'tree publications/',
-      label: 'publications',
-      icon: '<svg viewBox="0 0 16 16" fill="currentColor"><path d="M3 1.5h7L13 4.5V14.5H3V1.5zm7 0V4.5h3"/></svg>',
-      content: `
-<h2>## publications</h2>
-<pre class="tree">publications/
-├── <span class="dim">2026/</span>
-│   └── <strong>π-Distill: Privileged Information Distillation for Language Models</strong> — <span class="tag">arXiv 2026</span> · <a href="https://arxiv.org/abs/2602.04942">paper</a> · <a href="https://emilianopp.github.io/Privileged-Information-Distillation-and-Self-Distillation/">blog</a>
-│       <span class="dim">Emiliano Peñaloza, <span class="me">Dheeraj Vattikonda</span>, Nicolas Gontier, Alexandre Lacoste, Laurent Charlin, Massimo Caccia</span>
-│
-├── <span class="dim">2025/</span>
-│   └── <strong>How to Train Your LLM Web Agent: A Statistical Diagnosis</strong> — <span class="tag">NeurIPS 2025</span> · <span class="tag">ICML CUA Workshop (Oral)</span> · <a href="https://arxiv.org/abs/2507.04103">paper</a> · <a href="https://www.youtube.com/watch?v=zTI4kFqy9dw">slides</a>
-│       <span class="dim"><span class="me">Dheeraj Vattikonda</span> et al. (16 authors)</span>
-│
-├── <span class="dim">2024/</span>
-│   ├── <strong>Aurora: Action and Reasoning-Centric Image Editing</strong> — <span class="tag">NeurIPS 2024 (Spotlight)</span> · <a href="https://arxiv.org/abs/2407.03471">paper</a> · <a href="https://aurora-editing.github.io/">website</a>
-│   │   <span class="dim">Benno Krojer, <span class="me">Dheeraj Vattikonda</span>, Luis Lara, Varun Jampani, Eva Portelance, Christopher Pal, Siva Reddy</span>
-│   │
-│   └── <strong>SLACK: Attacking LiDAR-based SLAM with Adversarial Point Injections</strong> — <span class="tag">ICIPCW 2024</span> · <a href="https://arxiv.org/abs/2504.03089">paper</a>
-│       <span class="dim">Prashant Kumar, <span class="me">Dheeraj Vattikonda</span>, Kshitij Madhav Bhat, Kunal Dargan, Prem Kalra</span>
-│
-├── <span class="dim">2023/</span>
-│   └── <strong>Differentiable SLAM Helps Deep Learning-based LiDAR Perception Tasks</strong> — <span class="tag">BMVC 2023</span> · <a href="https://arxiv.org/abs/2309.09206">paper</a>
-│       <span class="dim">Prashant Kumar, <span class="me">Dheeraj Vattikonda</span>, Vedang Bhupesh Shenvi Nadkarni, Erqun Dong, Sabyasachi Sahoo</span>
-│
-└── <span class="dim">2022/</span>
-    └── <strong>Grad-LiDAR-SLAM: Fully Differentiable Global SLAM for LiDAR</strong> — <span class="tag">IROS 2022</span> · <a href="https://openreview.net/forum?id=tvPtqbjsKgX">paper</a>
-        <span class="dim"><span class="me">Dheeraj Vattikonda</span>, Aryan FNU, Erqun Dong, Sabyasachi Sahoo</span>
-</pre>
-      `
-    },
-    blogs: {
-      cmd: 'ls blogs/',
-      label: 'blogs',
-      icon: '<svg viewBox="0 0 16 16" fill="currentColor"><path d="M2 2h12v12H2zM4 5h8v1H4zM4 8h8v1H4zM4 11h5v1H4z"/></svg>',
-      content: `
-        <h2>## blogs</h2>
-        <ul>
-          <li><span class="date">[Feb 2026]</span> <strong>Understanding Self-Distillation and Privileged Information Distillation</strong><br>
-          <span class="dim">Emiliano Penaloza, <span class="me">Dheeraj Vattikonda</span>, Siddarth Venkatraman, Massimo Caccia</span><br>
-          <a href="https://emilianopp.github.io/Privileged-Information-Distillation-and-Self-Distillation/">read &rarr;</a></li>
-
-          <li style="margin-top:12px"><span class="date">[Dec 2025]</span> <strong>Apriel-1.6-15b-Thinker: Cost-efficient Frontier Multimodal Performance</strong><br>
-          <span class="dim">Sathwik Tejaswi Madhusudhan, Sagar Davasam, Torsten Scholak, Massimo Caccia, <span class="me">Dheeraj Vattikonda</span>, et al.</span><br>
-          <a href="https://huggingface.co/blog/ServiceNow-AI/apriel-1p6-15b-thinker">read &rarr;</a></li>
-        </ul>
-      `
-    },
-    contact: {
-      cmd: 'cat contact.txt',
-      label: 'contact',
-      icon: '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1.5" y="3" width="13" height="10"/><path d="M1.5 3l6.5 5 6.5-5"/></svg>',
-      content: `
-        <h2>## contact</h2>
-        <ul>
-          <li>scholar   <a href="https://scholar.google.com/citations?user=XJtv0zoAAAAJ">scholar.google.com</a></li>
-          <li>twitter   <a href="https://x.com/dheeraj_46329">@dheeraj_46329</a></li>
-          <li>linkedin  <a href="https://www.linkedin.com/in/dheeraj-vattikonda-429619184">/in/dheeraj-vattikonda</a></li>
-          <li>github    <a href="https://github.com/bosonforge">bosonforge</a></li>
-        </ul>
-      `
-    }
-  };
-
-  const navEl = document.getElementById('nav');
-  const outputEl = document.getElementById('output');
-  const cmdEl = document.getElementById('current-cmd');
-
-  let typingTimer = null;
-  function typeCommand(text, done) {
-    clearTimeout(typingTimer);
-    cmdEl.textContent = '';
-    let i = 0;
-    const tick = () => {
-      if (i <= text.length) {
-        cmdEl.textContent = text.slice(0, i);
-        i++;
-        typingTimer = setTimeout(tick, 60);
-      } else {
-        typingTimer = null;
-        if (done) done();
-      }
-    };
-    tick();
-  }
-
-  function render(key) {
-    const s = sections[key];
-    outputEl.innerHTML = '';
-    typeCommand(s.cmd, () => {
-      outputEl.innerHTML = s.content;
-    });
-    document.querySelectorAll('.nav-btn').forEach(b => {
-      b.classList.toggle('active', b.dataset.key === key);
-    });
-  }
-
-  Object.entries(sections).forEach(([key, s]) => {
-    const btn = document.createElement('button');
-    btn.className = 'nav-btn';
-    btn.dataset.key = key;
-    btn.innerHTML = s.icon + '<span>' + s.label + '</span>';
-    btn.addEventListener('click', () => render(key));
-    navEl.appendChild(btn);
-  });
-
-  // Boot animation
-  const bootLines = [
-    '[<span class="ok">  OK  </span>] booting bosonforge.io v1.0',
-    '[<span class="ok">  OK  </span>] loading profile: dheeraj vattikonda',
-    '[<span class="ok">  OK  </span>] mounting /about /news /publications /blogs /contact',
-    '[<span class="ok">  OK  </span>] indexed 6 publications &middot; 2 blogs &middot; 10 updates',
-    '[<span class="ok">  OK  </span>] ready in 0.42s'
-  ];
-  const bootEl = document.getElementById('boot');
-  bootLines.forEach((line, i) => {
-    setTimeout(() => {
-      const div = document.createElement('div');
-      div.innerHTML = line;
-      bootEl.appendChild(div);
-    }, i * 240);
-  });
-  setTimeout(() => render('about'), bootLines.length * 240 + 200);
-
-  // ===== HYBRID TYPING INPUT =====
-  const cmdInput = document.getElementById('cmd-input');
-  const typedText = document.getElementById('typed-text');
-  const promptLine = document.getElementById('prompt-line');
-
-  const aliases = {
-    pubs: 'publications', pub: 'publications',
-    blog: 'blogs', me: 'about', whoami: 'about'
-  };
-  const fileMap = {
-    'about.md': 'about',
-    'contact.txt': 'contact',
-    'news.log': 'news'
-  };
-
-  function setActive(key) {
-    document.querySelectorAll('.nav-btn').forEach(b => {
-      b.classList.toggle('active', b.dataset.key === key);
-    });
-  }
-
-  function showOutput(rawCmd, html, key) {
-    cmdEl.textContent = rawCmd;
-    outputEl.innerHTML = html;
-    setActive(key || null);
-  }
-
-  function escapeHtml(s) {
-    return s.replace(/[<>&"]/g, c => ({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;'}[c]));
-  }
-
-  function runCommand(raw) {
-    const cmd = raw.trim();
-    if (!cmd) return;
-    const lower = cmd.toLowerCase();
-
-    if (sections[lower]) {
-      showOutput(cmd, sections[lower].content, lower);
-      return;
-    }
-    if (aliases[lower]) {
-      showOutput(cmd, sections[aliases[lower]].content, aliases[lower]);
-      return;
-    }
-    if (lower === 'help' || lower === '?') {
-      showOutput(cmd, `
-        <h2>## help</h2>
-        <p><span class="dim">sections:</span> <span class="me">about</span> · <span class="me">news</span> · <span class="me">publications</span> · <span class="me">blogs</span> · <span class="me">contact</span></p>
-        <p><span class="dim">aliases:</span> pubs, blog, me, whoami</p>
-        <p><span class="dim">shell:</span> ls, pwd, date, clear, help</p>
-        <p><span class="dim">also:</span> cat about.md, tree publications/, tail news.log</p>
-        <p class="dim" style="margin-top:8px">tip: ↑/↓ for history. or just click the buttons.</p>
-      `);
-      return;
-    }
-    if (lower === 'clear' || lower === 'cls') {
-      cmdEl.textContent = '';
-      outputEl.innerHTML = '';
-      setActive(null);
-      return;
-    }
-    if (lower === 'ls' || lower === 'ls -la' || lower === 'ls -l') {
-      showOutput(cmd, `<pre class="tree">about.md   contact.txt   news.log   publications/   blogs/</pre>`);
-      return;
-    }
-    if (lower === 'pwd') {
-      showOutput(cmd, `<pre class="tree">/home/dheeraj</pre>`);
-      return;
-    }
-    if (lower === 'date') {
-      showOutput(cmd, `<pre class="tree">${new Date().toString()}</pre>`);
-      return;
-    }
-    if (lower.startsWith('cat ')) {
-      const file = lower.slice(4).trim();
-      if (fileMap[file]) {
-        showOutput(cmd, sections[fileMap[file]].content, fileMap[file]);
-        return;
-      }
-    }
-    if (lower.startsWith('tree') || lower === 'ls publications/' || lower === 'ls publications') {
-      showOutput(cmd, sections.publications.content, 'publications');
-      return;
-    }
-    if (lower.startsWith('tail') && lower.includes('news')) {
-      showOutput(cmd, sections.news.content, 'news');
-      return;
-    }
-    if (lower === 'ls blogs/' || lower === 'ls blogs') {
-      showOutput(cmd, sections.blogs.content, 'blogs');
-      return;
-    }
-    if (lower === 'sudo' || lower.startsWith('sudo ')) {
-      showOutput(cmd, `<p class="dim">[sudo] password for dheeraj:<br>nice try.</p>`);
-      return;
-    }
-    if (lower === 'exit' || lower === 'logout') {
-      showOutput(cmd, `<p class="dim">no escape.</p>`);
-      return;
-    }
-    showOutput(cmd, `<p><span style="color: var(--purple)">zsh:</span> command not found: ${escapeHtml(cmd)}<br><span class="dim">try: help</span></p>`);
-  }
-
-  const cmdHistory = [];
-  let histIdx = -1;
-
-  const completionList = [
-    'about', 'news', 'publications', 'blogs', 'contact',
-    'pubs', 'blog', 'me', 'whoami',
-    'help', 'clear', 'ls', 'ls -la', 'pwd', 'date',
-    'cat about.md', 'cat contact.txt',
-    'tree publications/', 'tail news.log'
-  ];
-
-  function commonPrefix(arr) {
-    if (!arr.length) return '';
-    let p = arr[0];
-    for (let i = 1; i < arr.length; i++) {
-      while (!arr[i].startsWith(p)) p = p.slice(0, -1);
-      if (!p) return '';
-    }
-    return p;
-  }
-
-  cmdInput.addEventListener('input', () => {
-    typedText.textContent = cmdInput.value;
-  });
-
-  cmdInput.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') {
-      e.preventDefault();
-      const v = cmdInput.value;
-      cmdInput.value = '';
-      typedText.textContent = '';
-      if (v.trim()) {
-        cmdHistory.push(v);
-        histIdx = -1;
-        runCommand(v);
-      }
-    } else if (e.key === 'ArrowUp') {
-      e.preventDefault();
-      if (cmdHistory.length === 0) return;
-      if (histIdx < cmdHistory.length - 1) histIdx++;
-      cmdInput.value = cmdHistory[cmdHistory.length - 1 - histIdx];
-      typedText.textContent = cmdInput.value;
-    } else if (e.key === 'ArrowDown') {
-      e.preventDefault();
-      if (histIdx > 0) {
-        histIdx--;
-        cmdInput.value = cmdHistory[cmdHistory.length - 1 - histIdx];
-      } else {
-        histIdx = -1;
-        cmdInput.value = '';
-      }
-      typedText.textContent = cmdInput.value;
-    } else if (e.key === 'Tab') {
-      e.preventDefault();
-      const partial = cmdInput.value.toLowerCase();
-      if (!partial) return;
-      const matches = completionList.filter(c => c.startsWith(partial));
-      if (matches.length === 0) return;
-      if (matches.length === 1) {
-        cmdInput.value = matches[0];
-        typedText.textContent = matches[0];
-      } else {
-        const cmn = commonPrefix(matches);
-        if (cmn.length > partial.length) {
-          cmdInput.value = cmn;
-          typedText.textContent = cmn;
-        } else {
-          outputEl.innerHTML = `<p class="dim">${matches.join('   ')}</p>`;
-          setActive(null);
+    <script>
+        // ===== MOBILE MENU =====
+        function toggleMenu() {
+            document.querySelector('.mobile-menu').classList.toggle('open');
         }
-      }
-    }
-  });
+        document.addEventListener('click', function(e) {
+            const menu = document.querySelector('.mobile-menu');
+            const hamburger = document.querySelector('.hamburger');
+            if (menu.classList.contains('open') && !menu.contains(e.target) && !hamburger.contains(e.target)) {
+                menu.classList.remove('open');
+            }
+        });
 
-  promptLine.addEventListener('click', () => cmdInput.focus());
-  setTimeout(() => cmdInput.focus(), bootLines.length * 240 + 600);
-</script>
+        // ===== THEME TOGGLE =====
+        function toggleTheme() {
+            const html = document.documentElement;
+            const isDark = html.getAttribute('data-theme') === 'dark';
+            html.setAttribute('data-theme', isDark ? '' : 'dark');
+            localStorage.setItem('theme', isDark ? 'light' : 'dark');
+        }
+
+        // Load saved theme
+        (function() {
+            const saved = localStorage.getItem('theme');
+            if (saved === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+        })();
+    </script>
+
 </body>
 </html>
