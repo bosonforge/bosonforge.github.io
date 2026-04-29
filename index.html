@@ -149,11 +149,15 @@
   .tree {
     margin: 0;
     padding: 4px 0 0 0;
-    white-space: pre;
     overflow-x: auto;
     line-height: 1.75;
     font-size: 14px;
     font-family: inherit;
+  }
+  .tree-line {
+    white-space: pre;
+    animation: outReveal 0.3s ease-out backwards;
+    animation-delay: calc(var(--i, 0) * 35ms);
   }
   .tree strong { color: var(--text); font-weight: 600; }
   .tree a { color: var(--blue); text-decoration: none; }
@@ -161,8 +165,36 @@
   .tree::-webkit-scrollbar { height: 6px; }
   .tree::-webkit-scrollbar-track { background: transparent; }
   .tree::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+  .output .tree { animation: none; }
   .boot div { animation: fadeIn 0.18s ease-out; }
   @keyframes fadeIn { from { opacity: 0; transform: translateY(-2px); } to { opacity: 1; transform: none; } }
+
+  /* Autoregressive-style cascade reveal in output */
+  .output > * { animation: outReveal 0.4s ease-out backwards; }
+  .output ul > li { animation: outReveal 0.35s ease-out backwards; }
+  @keyframes outReveal {
+    from { opacity: 0; transform: translateY(4px); }
+    to   { opacity: 1; transform: none; }
+  }
+  .output > *:nth-child(1) { animation-delay: 0ms; }
+  .output > *:nth-child(2) { animation-delay: 80ms; }
+  .output > *:nth-child(3) { animation-delay: 160ms; }
+  .output > *:nth-child(4) { animation-delay: 240ms; }
+  .output > *:nth-child(5) { animation-delay: 320ms; }
+  .output > *:nth-child(6) { animation-delay: 400ms; }
+  .output > *:nth-child(7) { animation-delay: 480ms; }
+
+  .output ul > li:nth-child(1)  { animation-delay: 100ms; }
+  .output ul > li:nth-child(2)  { animation-delay: 160ms; }
+  .output ul > li:nth-child(3)  { animation-delay: 220ms; }
+  .output ul > li:nth-child(4)  { animation-delay: 280ms; }
+  .output ul > li:nth-child(5)  { animation-delay: 340ms; }
+  .output ul > li:nth-child(6)  { animation-delay: 400ms; }
+  .output ul > li:nth-child(7)  { animation-delay: 460ms; }
+  .output ul > li:nth-child(8)  { animation-delay: 520ms; }
+  .output ul > li:nth-child(9)  { animation-delay: 580ms; }
+  .output ul > li:nth-child(10) { animation-delay: 640ms; }
+  .output ul > li:nth-child(n+11) { animation-delay: 700ms; }
   .profile-row {
     display: flex;
     gap: 20px;
@@ -336,30 +368,31 @@
       icon: '<svg viewBox="0 0 16 16" fill="currentColor"><path d="M3 1.5h7L13 4.5V14.5H3V1.5zm7 0V4.5h3"/></svg>',
       content: `
 <h2>## publications</h2>
-<pre class="tree">publications/
-├── <span class="dim">2026/</span>
-│   └── <strong>π-Distill: Privileged Information Distillation for Language Models</strong> — <span class="tag">arXiv 2026</span> · <a href="https://arxiv.org/abs/2602.04942">paper</a> · <a href="https://emilianopp.github.io/Privileged-Information-Distillation-and-Self-Distillation/">blog</a>
-│       <span class="dim">Emiliano Peñaloza, <span class="me">Dheeraj Vattikonda</span>, Nicolas Gontier, Alexandre Lacoste, Laurent Charlin, Massimo Caccia</span>
-│
-├── <span class="dim">2025/</span>
-│   └── <strong>How to Train Your LLM Web Agent: A Statistical Diagnosis</strong> — <span class="tag">NeurIPS 2025</span> · <span class="tag">ICML CUA Workshop (Oral)</span> · <a href="https://arxiv.org/abs/2507.04103">paper</a> · <a href="https://www.youtube.com/watch?v=zTI4kFqy9dw">slides</a>
-│       <span class="dim"><span class="me">Dheeraj Vattikonda</span> et al. (16 authors)</span>
-│
-├── <span class="dim">2024/</span>
-│   ├── <strong>Aurora: Action and Reasoning-Centric Image Editing</strong> — <span class="tag">NeurIPS 2024 (Spotlight)</span> · <a href="https://arxiv.org/abs/2407.03471">paper</a> · <a href="https://aurora-editing.github.io/">website</a>
-│   │   <span class="dim">Benno Krojer, <span class="me">Dheeraj Vattikonda</span>, Luis Lara, Varun Jampani, Eva Portelance, Christopher Pal, Siva Reddy</span>
-│   │
-│   └── <strong>SLACK: Attacking LiDAR-based SLAM with Adversarial Point Injections</strong> — <span class="tag">ICIPCW 2024</span> · <a href="https://arxiv.org/abs/2504.03089">paper</a>
-│       <span class="dim">Prashant Kumar, <span class="me">Dheeraj Vattikonda</span>, Kshitij Madhav Bhat, Kunal Dargan, Prem Kalra</span>
-│
-├── <span class="dim">2023/</span>
-│   └── <strong>Differentiable SLAM Helps Deep Learning-based LiDAR Perception Tasks</strong> — <span class="tag">BMVC 2023</span> · <a href="https://arxiv.org/abs/2309.09206">paper</a>
-│       <span class="dim">Prashant Kumar, <span class="me">Dheeraj Vattikonda</span>, Vedang Bhupesh Shenvi Nadkarni, Erqun Dong, Sabyasachi Sahoo</span>
-│
-└── <span class="dim">2022/</span>
-    └── <strong>Grad-LiDAR-SLAM: Fully Differentiable Global SLAM for LiDAR</strong> — <span class="tag">IROS 2022</span> · <a href="https://openreview.net/forum?id=tvPtqbjsKgX">paper</a>
-        <span class="dim"><span class="me">Dheeraj Vattikonda</span>, Aryan FNU, Erqun Dong, Sabyasachi Sahoo</span>
-</pre>
+<div class="tree">
+<div class="tree-line">publications/</div>
+<div class="tree-line">├── <span class="dim">2026/</span></div>
+<div class="tree-line">│   └── <strong>π-Distill: Privileged Information Distillation for Language Models</strong> — <span class="tag">arXiv 2026</span> · <a href="https://arxiv.org/abs/2602.04942">paper</a> · <a href="https://emilianopp.github.io/Privileged-Information-Distillation-and-Self-Distillation/">blog</a></div>
+<div class="tree-line">│       <span class="dim">Emiliano Peñaloza, <span class="me">Dheeraj Vattikonda</span>, Nicolas Gontier, Alexandre Lacoste, Laurent Charlin, Massimo Caccia</span></div>
+<div class="tree-line">│</div>
+<div class="tree-line">├── <span class="dim">2025/</span></div>
+<div class="tree-line">│   └── <strong>How to Train Your LLM Web Agent: A Statistical Diagnosis</strong> — <span class="tag">NeurIPS 2025</span> · <span class="tag">ICML CUA Workshop (Oral)</span> · <a href="https://arxiv.org/abs/2507.04103">paper</a> · <a href="https://www.youtube.com/watch?v=zTI4kFqy9dw">slides</a></div>
+<div class="tree-line">│       <span class="dim"><span class="me">Dheeraj Vattikonda</span> et al. (16 authors)</span></div>
+<div class="tree-line">│</div>
+<div class="tree-line">├── <span class="dim">2024/</span></div>
+<div class="tree-line">│   ├── <strong>Aurora: Action and Reasoning-Centric Image Editing</strong> — <span class="tag">NeurIPS 2024 (Spotlight)</span> · <a href="https://arxiv.org/abs/2407.03471">paper</a> · <a href="https://aurora-editing.github.io/">website</a></div>
+<div class="tree-line">│   │   <span class="dim">Benno Krojer, <span class="me">Dheeraj Vattikonda</span>, Luis Lara, Varun Jampani, Eva Portelance, Christopher Pal, Siva Reddy</span></div>
+<div class="tree-line">│   │</div>
+<div class="tree-line">│   └── <strong>SLACK: Attacking LiDAR-based SLAM with Adversarial Point Injections</strong> — <span class="tag">ICIPCW 2024</span> · <a href="https://arxiv.org/abs/2504.03089">paper</a></div>
+<div class="tree-line">│       <span class="dim">Prashant Kumar, <span class="me">Dheeraj Vattikonda</span>, Kshitij Madhav Bhat, Kunal Dargan, Prem Kalra</span></div>
+<div class="tree-line">│</div>
+<div class="tree-line">├── <span class="dim">2023/</span></div>
+<div class="tree-line">│   └── <strong>Differentiable SLAM Helps Deep Learning-based LiDAR Perception Tasks</strong> — <span class="tag">BMVC 2023</span> · <a href="https://arxiv.org/abs/2309.09206">paper</a></div>
+<div class="tree-line">│       <span class="dim">Prashant Kumar, <span class="me">Dheeraj Vattikonda</span>, Vedang Bhupesh Shenvi Nadkarni, Erqun Dong, Sabyasachi Sahoo</span></div>
+<div class="tree-line">│</div>
+<div class="tree-line">└── <span class="dim">2022/</span></div>
+<div class="tree-line">    └── <strong>Grad-LiDAR-SLAM: Fully Differentiable Global SLAM for LiDAR</strong> — <span class="tag">IROS 2022</span> · <a href="https://openreview.net/forum?id=tvPtqbjsKgX">paper</a></div>
+<div class="tree-line">        <span class="dim"><span class="me">Dheeraj Vattikonda</span>, Aryan FNU, Erqun Dong, Sabyasachi Sahoo</span></div>
+</div>
       `
     },
     blogs: {
@@ -421,11 +454,41 @@
     tick();
   }
 
+  const vibeWords = [
+    'brewing', 'steeping', 'percolating', 'simmering', 'marinating',
+    'thinking', 'pondering', 'cogitating', 'ruminating', 'mulling',
+    'hallucinating', 'conjuring', 'dreaming', 'imagining', 'synthesizing',
+    'crunching', 'parsing', 'compiling', 'indexing', 'computing',
+    'wandering', 'spelunking', 'foraging', 'scanning',
+    'untangling', 'unraveling', 'decoding', 'wrangling',
+    'noodling', 'tinkering', 'doodling', 'vibing', 'wizarding'
+  ];
+  function vibeWord() {
+    return vibeWords[Math.floor(Math.random() * vibeWords.length)];
+  }
+
+  function indexTreeLines() {
+    outputEl.querySelectorAll('.tree-line').forEach((el, i) => {
+      el.style.setProperty('--i', i);
+    });
+  }
+
+  let thinkTimer = null;
+  function thinkAndShow(html, key) {
+    clearTimeout(thinkTimer);
+    outputEl.innerHTML = `<p class="dim thinking">${vibeWord()}...</p>`;
+    thinkTimer = setTimeout(() => {
+      outputEl.innerHTML = html;
+      indexTreeLines();
+      thinkTimer = null;
+    }, 450 + Math.random() * 250);
+  }
+
   function render(key) {
     const s = sections[key];
     outputEl.innerHTML = '';
     typeCommand(s.cmd, () => {
-      outputEl.innerHTML = s.content;
+      thinkAndShow(s.content, key);
     });
     document.querySelectorAll('.nav-btn').forEach(b => {
       b.classList.toggle('active', b.dataset.key === key);
@@ -480,10 +543,14 @@
     });
   }
 
-  function showOutput(rawCmd, html, key) {
+  function showOutput(rawCmd, html, key, opts) {
     cmdEl.textContent = rawCmd;
-    outputEl.innerHTML = html;
     setActive(key || null);
+    if (opts && opts.think) {
+      thinkAndShow(html, key);
+    } else {
+      outputEl.innerHTML = html;
+    }
   }
 
   function escapeHtml(s) {
@@ -496,11 +563,11 @@
     const lower = cmd.toLowerCase();
 
     if (sections[lower]) {
-      showOutput(cmd, sections[lower].content, lower);
+      showOutput(cmd, sections[lower].content, lower, {think: true});
       return;
     }
     if (aliases[lower]) {
-      showOutput(cmd, sections[aliases[lower]].content, aliases[lower]);
+      showOutput(cmd, sections[aliases[lower]].content, aliases[lower], {think: true});
       return;
     }
     if (lower === 'help' || lower === '?') {
@@ -535,20 +602,20 @@
     if (lower.startsWith('cat ')) {
       const file = lower.slice(4).trim();
       if (fileMap[file]) {
-        showOutput(cmd, sections[fileMap[file]].content, fileMap[file]);
+        showOutput(cmd, sections[fileMap[file]].content, fileMap[file], {think: true});
         return;
       }
     }
     if (lower.startsWith('tree') || lower === 'ls publications/' || lower === 'ls publications') {
-      showOutput(cmd, sections.publications.content, 'publications');
+      showOutput(cmd, sections.publications.content, 'publications', {think: true});
       return;
     }
     if (lower.startsWith('tail') && lower.includes('news')) {
-      showOutput(cmd, sections.news.content, 'news');
+      showOutput(cmd, sections.news.content, 'news', {think: true});
       return;
     }
     if (lower === 'ls blogs/' || lower === 'ls blogs') {
-      showOutput(cmd, sections.blogs.content, 'blogs');
+      showOutput(cmd, sections.blogs.content, 'blogs', {think: true});
       return;
     }
     if (lower === 'sudo' || lower.startsWith('sudo ')) {
